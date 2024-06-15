@@ -1,0 +1,61 @@
+CREATE TABLE `category` (
+  `name` varchar(110) COLLATE utf8_bin NOT NULL,
+  `avatar` varchar(150) COLLATE utf8_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+CREATE TABLE `items` (
+  `name` varchar(150) COLLATE utf8_bin NOT NULL,
+  `price` float NOT NULL,
+  `image` varchar(150) COLLATE utf8_bin DEFAULT NULL,
+  `category` varchar(110) COLLATE utf8_bin NOT NULL,
+  `qtstock` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+CREATE TABLE `orders` (
+  `num` int(11) NOT NULL,
+  `user_id` varchar(110) COLLATE utf8_bin NOT NULL,
+  `table_id` varchar(110) COLLATE utf8_bin DEFAULT NULL,
+  `datecmd` datetime NOT NULL,
+  `total` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+CREATE TABLE `orders_items` (
+  `id` int(11) NOT NULL,
+  `order_num` int(11) NOT NULL,
+  `item` varchar(110) COLLATE utf8_bin NOT NULL,
+  `qty` int(11) NOT NULL,
+  `price` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+CREATE TABLE `orders_mobile` (
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+CREATE TABLE `tables` (
+  `name` varchar(110) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+CREATE TABLE `users` (
+  `pin` varchar(110) COLLATE utf8_bin NOT NULL,
+  `name` varchar(110) COLLATE utf8_bin NOT NULL,
+  `role` varchar(110) COLLATE utf8_bin DEFAULT NULL,
+  `datefin` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+INSERT INTO `users` (`pin`, `name`, `role`, `datefin`) VALUES('1470', 'ADMIN', 'admin', NULL);
+
+ALTER TABLE `category` ADD PRIMARY KEY (`name`);
+
+ALTER TABLE `items`ADD PRIMARY KEY (`name`);
+
+ALTER TABLE `orders`  ADD PRIMARY KEY (`num`);
+
+ALTER TABLE `orders_items` ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `tables` ADD PRIMARY KEY (`name`);
+
+ALTER TABLE `users`ADD PRIMARY KEY (`pin`), ADD UNIQUE KEY `name` (`name`);
+
+ALTER TABLE `orders` MODIFY `num` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
+ALTER TABLE `orders_items` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
